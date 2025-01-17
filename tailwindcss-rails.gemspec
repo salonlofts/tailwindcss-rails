@@ -16,5 +16,5 @@ Gem::Specification.new do |spec|
   spec.files = Dir["{app,lib}/**/*", "MIT-LICENSE", "Rakefile", "README.md"]
 
   spec.add_dependency "railties", ">= 5.0.0", "< 6.0.0"
-  spec.add_dependency "tailwindcss-ruby", ">= 0.0"
+  #spec.add_dependency "tailwindcss-ruby", ">= 0.0"
 end

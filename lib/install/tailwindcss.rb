@@ -3,9 +3,15 @@ CENTERING_CONTAINER_INSERTION_POINT = /^\s*<%= yield %>/.freeze
 
 if APPLICATION_LAYOUT_PATH.exist?
   say "Add Tailwindcss include tags and container element in application layout"
-  insert_into_file APPLICATION_LAYOUT_PATH.to_s, <<~ERB.indent(4), before: /^\s*<%= stylesheet_link_tag/
-    <%= stylesheet_link_tag "tailwind", "inter-font", "data-turbo-track": "reload" %>
-  ERB
+  if Rails::VERSION::MAJOR == 5
+    insert_into_file APPLICATION_LAYOUT_PATH.to_s, <<~ERB.indent(4), before: /^\s*<%= stylesheet_link_tag/
+      <%= stylesheet_link_tag "tailwind", "data-turbolinks-track": "reload" %>
+    ERB
+  else
+    insert_into_file APPLICATION_LAYOUT_PATH.to_s, <<~ERB.indent(4), before: /^\s*<%= stylesheet_link_tag/
+      <%= stylesheet_link_tag "tailwind", "inter-font", "data-turbo-track": "reload" %>
+    ERB
+  end
 
   if File.open(APPLICATION_LAYOUT_PATH).read =~ /<body>\n\s*<%= yield %>\n\s*<\/body>/
     insert_into_file APPLICATION_LAYOUT_PATH.to_s, %(    <main class="container mx-auto mt-28 px-5 flex">\n  ), before: CENTERING_CONTAINER_INSERTION_POINT

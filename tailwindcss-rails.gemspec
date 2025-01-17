@@ -10,14 +10,11 @@ Gem::Specification.new do |spec|
   spec.license     = "MIT"
 
   spec.metadata = {
-    "homepage_uri" => spec.homepage,
-    "rubygems_mfa_required" => "true"
+    "homepage_uri" => spec.homepage
   }
-
-  spec.required_rubygems_version = ">= 3.2.0" # for Gem::Platform#match_gem?
 
   spec.files = Dir["{app,lib}/**/*", "MIT-LICENSE", "Rakefile", "README.md"]
 
-  spec.add_dependency "railties", ">= 7.0.0"
-  spec.add_dependency "tailwindcss-ruby"
+  spec.add_dependency "railties", ">= 5.0.0", "< 6.0.0"
+  spec.add_dependency "tailwindcss-ruby", ">= 0.0"
 end
